@@ -56,9 +56,32 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapter\AutocompleteContenedorAdapter.cs" />
+    <Compile Include="ConnectivityService.cs" />
+    <Compile Include="Login.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="ModelApi\CodigoTelaApi.cs" />
+    <Compile Include="ModelApi\ContenedorApi.cs" />
+    <Compile Include="ModelApi\RolloModel.cs" />
+    <Compile Include="ModelApi\SwatchApi.cs" />
+    <Compile Include="ModelSqlite\CodigoTelaSqlite.cs" />
+    <Compile Include="ModelSqlite\ContenedorSqlite.cs" />
+    <Compile Include="ModelSqlite\RolloSqlite.cs" />
+    <Compile Include="ModelSqlite\SwatchSqlite.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Servicios\CodigoTelaServ.cs" />
+    <Compile Include="Servicios\ContenedorServ.cs" />
+    <Compile Include="Servicios\RolloServ.cs" />
+    <Compile Include="Servicios\SwatchServ.cs" />
+    <Compile Include="Servicios\UrlMain.cs" />
+    <Compile Include="SqliteConexion\AndroidSQLite.cs" />
+    <Compile Include="SqliteConexion\DataBaseContext.cs" />
+    <Compile Include="SqliteConexion\ISQLite.cs" />
+    <Compile Include="SqliteConexion\RolloRepositorio.cs" />
+    <Compile Include="SqliteConexion\SwatchRepositorio.cs" />
+    <Compile Include="Swatch.cs" />
+    <Compile Include="Width.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -92,7 +115,40 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_round.png" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.Net.Http">
+      <Version>2.2.29</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="sqlite-net-pcl">
+      <Version>1.7.335</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\listaRollos.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\login.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\ingresoSwatch.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\ingresoWidth.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\autocomContenedor.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
