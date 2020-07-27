@@ -1,5 +1,6 @@
 ﻿
 using SQLite;
+using System;
 
 namespace IngresoSwatch.ModelSqlite
 {
@@ -16,5 +17,7 @@ namespace IngresoSwatch.ModelSqlite
         public double y3 { get; set; }
         public double p1 { get; set; }
         public double p2 { get; set; }
+        public DateTime Fecha { get; set; }
+        public string Usuario { get; set; }
     }
 }

@@ -4,24 +4,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 	<LinearLayout
-		android:orientation="horizontal"
+		android:orientation="vertical"
 		android:minWidth="25px"
 		android:minHeight="25px"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:id="@+id/linearLayout1" >
-		<TextView
-			android:text="Contenedor"
-			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
-			android:paddingTop=10
-			android:paddingLeft=5
-			android:id="@+id/textView1" />
-		<AutoCompleteTextView
+			android:layout_marginTop="15dp"
+		android:paddingHorizontal="10dp"
+		android:id="@+id/linearLayout2" >
+		<ImageView
+			android:src="@drawable/contenedor"
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:id="@+id/autoCompleteTextView1" />
+			android:layout_height="100dp"		
+			android:id="@+id/imageView1" />
 	</LinearLayout>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:layout_marginTop="40dp"
+		android:paddingHorizontal="10dp"
+        android:id="@+id/linearLayout1">
+        <TextView
+            android:text="Contenedor"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingTop="10dp"
+            android:paddingLeft="5dp"
+            android:id="@+id/textView1" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+			android:gravity="center"
+            android:id="@+id/editText1" />
+         
+    </LinearLayout>
+
+	<ListView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:divider="@drawable/abc_btn_borderless_material"
+        android:id="@+id/listView1" />
 
 
 

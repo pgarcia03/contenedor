@@ -11,6 +11,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using IngresoSwatch.ModelApi;
 using IngresoSwatch.ModelSqlite;
 using Newtonsoft.Json;
 
@@ -37,7 +38,7 @@ namespace IngresoSwatch.Servicios
         }
         */
 
-        public static async Task<HttpResponseMessage> SaveSwatch(SwatchSqlite obj)
+        public static async Task<HttpResponseMessage> SaveSwatch(SwatchModel obj)
         {
 
             HttpClient httpClient = new HttpClient();
@@ -56,7 +57,7 @@ namespace IngresoSwatch.Servicios
 
         }
 
-        public static async Task<HttpResponseMessage> SaveSwatch(List<SwatchSqlite> obj)
+        public static async Task<HttpResponseMessage> SaveSwatch(List<SwatchModel> obj)
         {
 
             HttpClient httpClient = new HttpClient();

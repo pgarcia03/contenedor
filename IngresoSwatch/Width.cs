@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
@@ -15,6 +10,9 @@ namespace IngresoSwatch
     [Activity(Label = "Width")]
     public class Width : Activity
     {
+        public static readonly string idcontenedor = "idcontenedor";
+        public static readonly string contenedor = "contenedor";
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);

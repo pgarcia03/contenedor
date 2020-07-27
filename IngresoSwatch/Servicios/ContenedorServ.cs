@@ -37,5 +37,26 @@ namespace IngresoSwatch.Servicios
             return null;
 
         }
+
+        public static async Task<List<ContenedorModel>> GetContenedor()
+        {
+
+            HttpClient httpClient = new HttpClient();
+            var uri = new UrlMain();
+            string url = string.Concat(uri.UrlM, "contenedors/");
+
+            var response = await httpClient.GetAsync(url).ConfigureAwait(false);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                var contenedor = ContenedorModel.FromJson(json);
+
+                return contenedor;
+            }
+            return null;
+
+        }
     }
 }

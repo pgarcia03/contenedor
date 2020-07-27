@@ -13,12 +13,13 @@ using IngresoSwatch.ModelApi;
 
 namespace IngresoSwatch.Adapter
 {
-    public class AutocompleteContenedorAdapter : BaseAdapter<ContenedorModel>
+    class CodigosTelaAdapter : BaseAdapter<CodigoTelaModel>
     {
-        private readonly Activity _context;
-        private readonly List<ContenedorModel> _items;
 
-        public AutocompleteContenedorAdapter(Activity context, List<ContenedorModel> items) : base()
+        private readonly Activity _context;
+        private readonly List<CodigoTelaModel> _items;
+
+        public CodigosTelaAdapter(Activity context, List<CodigoTelaModel> items) : base()
         {
             _context = context;
             _items = items;
@@ -34,13 +35,13 @@ namespace IngresoSwatch.Adapter
 
             }
 
-            convertView.FindViewById<TextView>(Resource.Id.txtidcontenedor).Text = item.Idcontenedor.ToString();
-            convertView.FindViewById<TextView>(Resource.Id.txtnombrecontenedor).Text = item.Contenedor.ToString();
-         
+            convertView.FindViewById<TextView>(Resource.Id.txtidcontenedor).Text = item.Idtpc.ToString();
+            convertView.FindViewById<TextView>(Resource.Id.txtnombrecontenedor).Text = item.Procod.ToString();
+
             return convertView;
         }
 
-       
+
         public override long GetItemId(int position)
         {
             return position;
@@ -48,13 +49,12 @@ namespace IngresoSwatch.Adapter
 
         public override int Count => _items.Count;
 
-        public override ContenedorModel this[int position] => _items[position];
+        public override CodigoTelaModel this[int position] => _items[position];
 
         public void RemoveItemAt(int position)
         {
             _items.RemoveAt(position);
         }
-
 
     }
 }

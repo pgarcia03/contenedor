@@ -18,7 +18,7 @@ namespace IngresoSwatch.Servicios
 
         public UrlMain()
         {
-            this.UrlM = "http://192.168.14.97:22351/";
+            this.UrlM = "http://192.168.14.97:44570/api/";
         }
     }
 }
