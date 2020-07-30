@@ -9,16 +9,55 @@ using System.Collections.Generic;
 using IngresoSwatch.ModelApi;
 using alert = Android.Support.V7.App.AlertDialog;
 using Android.Content;
+using System.Threading.Tasks;
+using Android.Util;
+using System.Linq;
 
 namespace IngresoSwatch
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
+        protected override void OnStart()
+        {
+            editText1.Text = string.Empty;
+
+            Task.Run( async() => { await ListaContenedor(); }); //ContenedorServ.GetContenedor().Result;
+
+            Log.Debug("OnStart", "OnStart called, app is ready to interact with the user");
+            base.OnResume();
+        }
+        protected override void OnResume()
+        {
+            Log.Debug("OnResume", "OnResume called, app is ready to interact with the user");
+            base.OnResume();
+        }
+
+        protected override void OnPause()
+        {
+            Log.Debug("OnPause", "OnPause called, App is moving to background");
+            base.OnPause();
+        }
+
+        protected override void OnStop()
+        {
+            Log.Debug("OnStop", "OnStop called, App is in the background");
+            base.OnStop();
+        }
+
+        protected override void OnDestroy()
+        {
+            editText1.Text = string.Empty;
+          
+            base.OnDestroy();
+            Log.Debug("OnDestroy", "OnDestroy called, App is Terminating");
+        }
+
         EditText editText1;
         ListView listView1;
         //AutoCompleteTextView txtsearch;
         List<ContenedorModel> list=new List<ContenedorModel>();
+        List<ContenedorModel> listtemp = new List<ContenedorModel>();
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -39,7 +78,8 @@ namespace IngresoSwatch
         {
             try
             {
-                var obj = list[e.Position];
+               
+                var obj =  listtemp[e.Position];
 
                 alert.Builder adb = new alert.Builder(this);
 
@@ -86,17 +126,16 @@ namespace IngresoSwatch
             try
             {
                 var num = editText1.Text.Length;
-                if (num>3)
+                if (num>0)
                 {
-                    list = ContenedorServ.GetContenedorXnombre(editText1.Text.TrimEnd()).Result;
-
-                    listView1.Adapter = new AutocompleteContenedorAdapter(this, list);
+                    listtemp = list.Where(x => x.Contenedor.Contains(editText1.Text)).ToList();
+                    listView1.Adapter = new AutocompleteContenedorAdapter(this,listtemp);
                 }
                 else
                 {
-                    list.Clear();// = ContenedorServ.GetContenedorXnombre(editText1.Text.TrimEnd()).Result;
-
-                    listView1.Adapter = new AutocompleteContenedorAdapter(this, list);
+                    listtemp.Clear();// = ContenedorServ.GetContenedorXnombre(editText1.Text.TrimEnd()).Result;
+                    //var listtemp = new List<ContenedorModel>();
+                    listView1.Adapter = new AutocompleteContenedorAdapter(this, listtemp);
                 }
               
             }
@@ -107,6 +146,19 @@ namespace IngresoSwatch
             }
         }
 
+        async Task<List<ContenedorModel>> ListaContenedor(string pre)
+        {
+            return await Task.Run(() => {
+                 return ContenedorServ.GetContenedorXnombre(editText1.Text.TrimEnd());
+            });
+        }
+
+        async Task ListaContenedor()
+        {
+             await Task.Run(() => {
+                list= ContenedorServ.GetContenedor().Result;
+            });
+        }
         //private void Txtsearch_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
         //{
         //    var num = txtsearch.Text.Length;

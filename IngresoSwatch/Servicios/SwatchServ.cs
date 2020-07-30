@@ -43,7 +43,7 @@ namespace IngresoSwatch.Servicios
 
             HttpClient httpClient = new HttpClient();
             var uri = new UrlMain();
-            string url = string.Concat(uri.UrlM, "swatch/");
+            string url = string.Concat(uri.UrlM, "Swatches/");
 
             String js = JsonConvert.SerializeObject(obj);
 
@@ -53,7 +53,6 @@ namespace IngresoSwatch.Servicios
             var response = await httpClient.PostAsync(url, httpContent).ConfigureAwait(false);
 
             return response;
-
 
         }
 
@@ -62,7 +61,7 @@ namespace IngresoSwatch.Servicios
 
             HttpClient httpClient = new HttpClient();
             var uri = new UrlMain();
-            string url = string.Concat(uri.UrlM, "swatch/");
+            string url = string.Concat(uri.UrlM, "Swatches/");
 
             String js = JsonConvert.SerializeObject(obj);
 
@@ -73,8 +72,8 @@ namespace IngresoSwatch.Servicios
 
             return response;
 
-
         }
+
         /*
                 public static async Task<List<Usuario>> GetUsuarios()
                 {

@@ -15,7 +15,7 @@
 		<ImageView
 			android:src="@drawable/contenedor"
 			android:layout_width="match_parent"
-			android:layout_height="100dp"		
+			android:layout_height="300dp"		
 			android:id="@+id/imageView1" />
 	</LinearLayout>
 
@@ -30,11 +30,13 @@
 		android:paddingHorizontal="10dp"
         android:id="@+id/linearLayout1">
         <TextView
-            android:text="Contenedor"
+            android:text="Busqueda de Contenedor"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:paddingTop="10dp"
             android:paddingLeft="5dp"
+			android:textSize="20dp"
+			android:textColor="@color/colorTextoAzul"
             android:id="@+id/textView1" />
         <EditText
             android:layout_width="match_parent"

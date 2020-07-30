@@ -3,7 +3,7 @@
 	android:orientation="vertical"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
- android:paddingHorizontal="10dp"	
+    android:paddingHorizontal="20dp"	
 	>
 
 	<TextView
@@ -13,6 +13,7 @@
 			android:layout_height="wrap_content"
 		    android:layout_marginTop="10dp"
 			android:layout_gravity="center"
+		    android:textColor="@color/colorTextoAzul"
 			android:id="@+id/textView1" />
 	
 	<LinearLayout
@@ -26,11 +27,13 @@
 
 		<Spinner
 		android:layout_width="match_parent"
-		android:layout_height="50dp"		
+		android:layout_height="50dp"			    
 		android:id="@+id/spinner1" />
 
 	</LinearLayout>
 
+	
+	
 	<LinearLayout
 		android:orientation="horizontal"
 		android:layout_marginTop="10dp"	
@@ -49,12 +52,46 @@
 			android:id="@+id/textView2" />
 
 		<EditText
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:paddingHorizontal="5dp"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+			    android:gravity="center"
+				android:inputType="numberDecimal"
+			    android:imeOptions="actionNext"
+			    android:nextFocusLeft="@+id/txtx1"
+			    android:nextFocusRight="@+id/txtx1" 
 			android:id="@+id/txtsecuenciaRollo" />
 
 	
+	</LinearLayout>
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_marginTop="10dp"	
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		>
+
+		<TextView
+			android:paddingLeft="5dp"
+			android:paddingTop="10dp"	
+			android:text="Codigo de Tela "
+			android:layout_width="wrap_content"
+		    android:textSize="20dp"
+			android:layout_height="match_parent"></TextView>
+		
+		<TextView
+			android:paddingLeft="5dp"
+			android:paddingTop="10dp"
+			android:textColor="@color/colorTextoAzul"
+			android:textSize="20dp"
+			android:id="@+id/lblcodigotela"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"></TextView>
+
+
+
 	</LinearLayout>
 
 	<LinearLayout
@@ -72,19 +109,20 @@
 			android:paddingTop="10dp"	
 			android:text="Codigo de Rollo"
 			android:layout_width="wrap_content"
+		    android:textSize="20dp"
 			android:layout_height="match_parent"></TextView>
 		
 		<TextView
 			android:paddingLeft="5dp"
 			android:paddingTop="10dp"
-			android:text="Codigo"
+			android:textColor="#594"
+			android:textSize="20dp"
 			android:id="@+id/lblnombrerollo"
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"></TextView>
 	
 	</LinearLayout>
 
-	
 	<LinearLayout
 		android:orientation="horizontal"
 		android:minWidth="25px"
@@ -100,7 +138,11 @@
 				android:layout_weight="1"
 			    android:gravity="center"
 				android:inputType="numberDecimal"
-				android:id="@+id/txtx1" />		
+			    android:imeOptions="actionNext"
+			    android:nextFocusLeft="@+id/txtx2"
+			    android:nextFocusRight="@+id/txtx2"  
+				android:id="@+id/txtx1" />	
+		
 			<EditText
 				android:hint="X2"		
 				android:layout_width="match_parent"
@@ -108,9 +150,11 @@
 				android:layout_weight="1"
 			    android:gravity="center"
 				android:inputType="numberDecimal"
-			    android:focusable="auto"
-			    android:nextFocusRight="@+id/txt3"
+			    android:imeOptions="actionNext"
+			    android:nextFocusLeft="@+id/txtx3"
+			    android:nextFocusRight="@+id/txtx3"
 				android:id="@+id/txtx2" />
+
 			<EditText
 				android:hint="X3"	
 				android:layout_width="match_parent"
@@ -118,6 +162,9 @@
 				android:layout_weight="1"
 			    android:gravity="center"
 				android:inputType="numberDecimal"
+			    android:imeOptions="actionNext"
+			    android:nextFocusLeft="@+id/txty1"
+			    android:nextFocusRight="@+id/txty1"
 				android:id="@+id/txtx3" />
 	
 		</LinearLayout>
@@ -136,60 +183,37 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
+			    android:gravity="center"
 				android:inputType="numberDecimal"
-			android:gravity="center"
+			    android:imeOptions="actionNext"
+			    android:nextFocusLeft="@+id/txty2"
+			    android:nextFocusRight="@+id/txty2"
 				android:id="@+id/txty1" />
 			<EditText
 				android:hint="Y2"
-				android:layout_width="match_parent"
+			    android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
-			android:gravity="center"
+			    android:gravity="center"
 				android:inputType="numberDecimal"
+			    android:imeOptions="actionNext"
+			    android:nextFocusLeft="@+id/txty3"
+			    android:nextFocusRight="@+id/txty3"
 				android:id="@+id/txty2" />
 			<EditText
 				android:hint="Y3"
-				android:layout_width="match_parent"
+			    android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
-			android:gravity="center"
+			    android:gravity="center"
 				android:inputType="numberDecimal"
+			    android:imeOptions="actionNext"
+			    android:nextFocusLeft="@+id/txtz1"
+			    android:nextFocusRight="@+id/txtz1"
 				android:id="@+id/txty3" />
 	   </LinearLayout>
 	
-	
-	<LinearLayout
-		android:orientation="horizontal"
-		android:minWidth="25px"
-		android:minHeight="25px"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:id="@+id/linearLayout6">
-			<EditText
-				android:hint="Z1"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_weight="1"
-			android:gravity="center"
-				android:inputType="numberDecimal"
-				android:id="@+id/txtz1" />
-			<EditText
-				android:hint="Z2"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_weight="1"
-			android:gravity="center"
-				android:inputType="numberDecimal"
-				android:id="@+id/txtz2" />
-			<EditText
-				android:hint="Z3"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_weight="1"
-			android:gravity="center"
-				android:inputType="numberDecimal"
-				android:id="@+id/txtz3" />
-		</LinearLayout>
+
 	<LinearLayout
 		android:orientation="horizontal"
 		android:minWidth="25px"
@@ -200,33 +224,59 @@
 
 			<EditText
 				android:hint="P1"
-				android:layout_width="match_parent"
+			    android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
-			android:gravity="center"
+			    android:gravity="center"
 				android:inputType="numberDecimal"
+			    android:imeOptions="actionNext"
+			    android:nextFocusLeft="@+id/txtp2"
+			    android:nextFocusRight="@+id/txtp2"
 				android:id="@+id/txtp1" />
 			<EditText
 				android:hint="P2"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
-			android:gravity="center"
+			    android:gravity="center"
 				android:inputType="numberDecimal"
+			    android:imeOptions="actionDone"
 				android:id="@+id/txtp2" />
 		</LinearLayout>
 
-		<Button
+	
+	<LinearLayout
+		android:orientation="vertical"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/linearLayout10">
+	
+	    <Button
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:text="Guardar"
+			android:textColor="@color/colorTextoButton"
+		    android:background="@color/colorButton"
 			android:id="@+id/btnguardarSwatch" />
+
+		<TextView
+			
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:textColor="?android:attr/textColorSecondary"
+			android:id="@+id/txttotalrollosS" />
+
+
 
 	    <ImageView
 		android:src="@drawable/CintaMedida"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:id="@+id/imageView1" />
+	</LinearLayout>
+		
 
 
 	   

@@ -18,7 +18,8 @@ namespace IngresoSwatch.Servicios
 
         public UrlMain()
         {
-            this.UrlM = "http://192.168.14.97:44570/api/";
+            this.UrlM = "http://192.168.14.8:44570/api/";
+          //  this.UrlM = "http://localhost:58228/api/";
         }
     }
 }

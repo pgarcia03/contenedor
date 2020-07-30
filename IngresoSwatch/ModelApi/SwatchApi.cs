@@ -41,15 +41,6 @@ namespace IngresoSwatch.ModelApi
         [JsonProperty("y3")]
         public double Y3 { get; set; }
 
-        [JsonProperty("z1")]
-        public double Z1 { get; set; }
-
-        [JsonProperty("z2")]
-        public double Z2 { get; set; }
-
-        [JsonProperty("z3")]
-        public double Z3 { get; set; }
-
         [JsonProperty("p1")]
         public double P1 { get; set; }
 
