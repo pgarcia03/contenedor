@@ -22,7 +22,16 @@ namespace IngresoSwatch
         {
             editText1.Text = string.Empty;
 
-            Task.Run( async() => { await ListaContenedor(); }); //ContenedorServ.GetContenedor().Result;
+            var conn = new ConnectivityService();
+
+            if (conn.IsConnected)
+            {
+                Task.Run(async () => { await ListaContenedor(); }); //ContenedorServ.GetContenedor().Result;
+            }
+            else
+            {
+                Alerta("Advertencia?", "Verifique su conexion a la red wifi");
+            }
 
             Log.Debug("OnStart", "OnStart called, app is ready to interact with the user");
             base.OnResume();
@@ -48,7 +57,7 @@ namespace IngresoSwatch
         protected override void OnDestroy()
         {
             editText1.Text = string.Empty;
-          
+
             base.OnDestroy();
             Log.Debug("OnDestroy", "OnDestroy called, App is Terminating");
         }
@@ -56,7 +65,7 @@ namespace IngresoSwatch
         EditText editText1;
         ListView listView1;
         //AutoCompleteTextView txtsearch;
-        List<ContenedorModel> list=new List<ContenedorModel>();
+        List<ContenedorModel> list = new List<ContenedorModel>();
         List<ContenedorModel> listtemp = new List<ContenedorModel>();
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -78,8 +87,8 @@ namespace IngresoSwatch
         {
             try
             {
-               
-                var obj =  listtemp[e.Position];
+
+                var obj = listtemp[e.Position];
 
                 alert.Builder adb = new alert.Builder(this);
 
@@ -88,7 +97,7 @@ namespace IngresoSwatch
                 //  adb.SetPositiveButton()
                 adb.SetPositiveButton("Medida Swatch", (senderAlert, args) =>
                 {
-                  
+
                     Intent i = new Intent(this, typeof(Swatch));
                     i.PutExtra(Swatch.idcontenedor, obj.Idcontenedor.ToString());
                     i.PutExtra(Swatch.contenedor, obj.Contenedor);
@@ -96,7 +105,8 @@ namespace IngresoSwatch
                     StartActivity(i);
 
                 });
-                adb.SetNegativeButton("Medida Ancho", (senderAlert, args) => {
+                adb.SetNegativeButton("Medida Ancho", (senderAlert, args) =>
+                {
 
                     Intent i = new Intent(this, typeof(Width));
                     i.PutExtra(Width.idcontenedor, obj.Idcontenedor.ToString());
@@ -106,7 +116,8 @@ namespace IngresoSwatch
 
                     //Toast.MakeText(this, "Elimacion cancelada", ToastLength.Short).Show();
                 });
-                adb.SetNeutralButton("Cancelar", (senderAlert, args) => {
+                adb.SetNeutralButton("Cancelar", (senderAlert, args) =>
+                {
 
                     Toast.MakeText(this, "Seleccion Cancelada", ToastLength.Short).Show();
                 });
@@ -126,10 +137,10 @@ namespace IngresoSwatch
             try
             {
                 var num = editText1.Text.Length;
-                if (num>0)
+                if (num > 0)
                 {
-                    listtemp = list.Where(x => x.Contenedor.Contains(editText1.Text)).ToList();
-                    listView1.Adapter = new AutocompleteContenedorAdapter(this,listtemp);
+                    listtemp = list.Where(x => x.Contenedor.ToUpper().Contains(editText1.Text.ToUpper())).ToList();
+                    listView1.Adapter = new AutocompleteContenedorAdapter(this, listtemp);
                 }
                 else
                 {
@@ -137,7 +148,7 @@ namespace IngresoSwatch
                     //var listtemp = new List<ContenedorModel>();
                     listView1.Adapter = new AutocompleteContenedorAdapter(this, listtemp);
                 }
-              
+
             }
             catch (System.Exception)
             {
@@ -148,17 +159,38 @@ namespace IngresoSwatch
 
         async Task<List<ContenedorModel>> ListaContenedor(string pre)
         {
-            return await Task.Run(() => {
-                 return ContenedorServ.GetContenedorXnombre(editText1.Text.TrimEnd());
+            return await Task.Run(() =>
+            {
+                return ContenedorServ.GetContenedorXnombre(editText1.Text.TrimEnd());
             });
         }
 
         async Task ListaContenedor()
         {
-             await Task.Run(() => {
-                list= ContenedorServ.GetContenedor().Result;
+            await Task.Run(() =>
+            {
+                list = ContenedorServ.GetContenedor().Result;
             });
         }
+
+        void Alerta(string title, string message)
+        {
+            alert.Builder adb = new alert.Builder(this);
+
+            adb.SetTitle(title);
+            adb.SetMessage(message);
+            adb.SetNeutralButton("Aceptar", (senderAlert, args) =>
+            {
+
+            });
+
+            alert dialog = adb.Create();
+
+            dialog.Show();
+
+        }
+
+
         //private void Txtsearch_TextChanged(object sender, Android.Text.TextChangedEventArgs e)
         //{
         //    var num = txtsearch.Text.Length;

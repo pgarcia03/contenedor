@@ -193,10 +193,20 @@ namespace IngresoSwatch
 
         }
 
-        private void BtbguardarWidth_Click(object sender, EventArgs e)
+        private async void BtbguardarWidth_Click(object sender, EventArgs e)
         {
+
+            var progress = new ProgressDialog(this)
+            {
+                Indeterminate = true
+            };
+            progress.SetProgressStyle(ProgressDialogStyle.Spinner);
+            progress.SetMessage("Loading... Please wait...");
+            progress.SetCancelable(false);
+
             try
             {
+
                 if (Validartxt(txtWidth) && idrolloWidth != 0)
                 {
 
@@ -212,7 +222,9 @@ namespace IngresoSwatch
 
                     if (conection.IsConnected)
                     {
-                        var resp = RolloServ.UpdateRollo(obj).Result;
+                        progress.Show();
+
+                        var resp = await Task.Run(()=> { return RolloServ.UpdateRollo(obj).Result; });
 
 
                         if (resp.StatusCode == System.Net.HttpStatusCode.OK)
@@ -227,21 +239,27 @@ namespace IngresoSwatch
 
                             var countItem = ListarollosWidth.Count;
                             lbltotalrollos.Text = string.Concat("Total de rollos por medir: ", countItem.ToString());
+                            txtsecuenciaRolloWidth.RequestFocus();
+
+                            progress.Dismiss();
                         }
                         else
                         {
+                            progress.Dismiss();
                             Alerta("Advertencia?", "Ha ocurrido un error, no se efectuaron los cambios!!!");
                         }
 
                     }
                     else
                     {
+                        progress.Dismiss();
                         Alerta("Advertencia?", "Verifique su conexion a la red wifi");
                     }
 
                 }
                 else
                 {
+                    progress.Dismiss();
                     Toast.MakeText(this, "llenar correctamente", ToastLength.Long).Show();
                 }
 
@@ -250,6 +268,8 @@ namespace IngresoSwatch
             }
             catch (Exception ex)
             {
+
+                progress.Dismiss();
                 Alerta("Advertencia?", ex.Message);
 
             }

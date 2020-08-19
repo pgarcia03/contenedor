@@ -217,8 +217,16 @@ namespace IngresoSwatch
             dialog.Show();
 
         }
-        private void BtbguardarSwatch_Click(object sender, EventArgs e)
+        private async void BtbguardarSwatch_Click(object sender, EventArgs e)
         {
+            var progress = new ProgressDialog(this)
+            {
+                Indeterminate = true
+            };
+            progress.SetProgressStyle(ProgressDialogStyle.Spinner);
+            progress.SetMessage("Loading... Please wait...");
+            progress.SetCancelable(false);
+
             try
             {
                 if (Validartxt(txtx1) && Validartxt(txtx2) && Validartxt(txtx3) &&
@@ -242,25 +250,41 @@ namespace IngresoSwatch
                         Fecha = DateTimeOffset.Now
                     };
 
-                    var resp = SwatchServ.SaveSwatch(obj).Result;
+                    var conection = new ConnectivityService();
 
-
-                    if (resp.StatusCode == System.Net.HttpStatusCode.OK)
+                    if (conection.IsConnected)
                     {
-                        Listarollos.RemoveAt(Listarollos.FindIndex(x=>x.Idrollo==idrollo));
-                        txtsecuenciaRollo.Text = string.Empty;
-                        lblnombrerollo.Text = "";
-                        Toast.MakeText(this,"Ingreso Correcto",ToastLength.Long).Show();
-                        idrollo = 0;
-                        Limpiartext();
-                        Enabled(false);
+                        progress.Show();
+                        var resp = await Task.Run(()=> { return SwatchServ.SaveSwatch(obj).Result; });
 
-                        var countItem = Listarollos.Count;
-                        lbltotalrollos.Text = string.Concat("Total de rollos por medir: ", countItem.ToString());
+                        if (resp.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            Listarollos.RemoveAt(Listarollos.FindIndex(x => x.Idrollo == idrollo));
+                            txtsecuenciaRollo.Text = string.Empty;
+                            lblnombrerollo.Text = "";
+                            Toast.MakeText(this, "Ingreso Correcto", ToastLength.Long).Show();
+                            idrollo = 0;
+                            Limpiartext();
+                            Enabled(false);
+
+                            var countItem = Listarollos.Count;
+                            lbltotalrollos.Text = string.Concat("Total de rollos por medir: ", countItem.ToString());
+                            progress.Dismiss();
+                            txtsecuenciaRollo.RequestFocus();
+
+                        }
                     }
+                    else
+                    {
+                        progress.Dismiss();
+                        Alerta("Advertencia?", "Verifique su conexion a la red wifi");
+                    }
+
+                   
                 }
                 else
                 {
+                    progress.Dismiss();
                     Toast.MakeText(this, "llenar correctamente", ToastLength.Long).Show();
                 }
 
@@ -269,6 +293,7 @@ namespace IngresoSwatch
             }
             catch (Exception ex)
             {
+                progress.Dismiss();
                 Alerta("Advertencia?", ex.Message);
 
             }
